@@ -8,10 +8,28 @@
 
 import UIKit
 
+class WeatherAPI
+{
+    private var weather_app_endstop = "api.openweathermap.org/data/2.5/weather?zip="
+    //94040,us
+    private var user_zip_code: String!
+    
+    public init (zip_code: String)
+    {
+        self.user_zip_code = zip_code
+    }
+    
+    var get_zip_code: String
+    {
+        get {return user_zip_code}
+    }
+}
+
 class ViewController: UIViewController
 {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var zip_code: UITextField!
+    @IBOutlet var submit_zip_code: UIButton!
     
     private var task = [String]()
     
@@ -35,84 +53,89 @@ class ViewController: UIViewController
         
         updateTask()
     }
-    
+
     func updateTask()
-        {
-            task.removeAll()
-            
-            guard let task_count = UserDefaults().value(forKey: "counting_task") as? Int else
-            {
-                return
-            }
-            
-            for i in 0..<task_count
-            {
-                if let enter_task = UserDefaults().value(forKey: "task_value_\(i + 1)") as? String
-                {
-                    task.append(enter_task)
-                }
-            }
-            
-            tableView.reloadData()
-        }
-        
-        @IBAction func addTask()
-        {
-            //let entry_task = storyboard?.instantiateViewController(withIdentifier: "enter_task") as! TaskEntryViewController
-            
-    //        let entry_task_date = storyboard?.instantiateViewController(withIdentifier: "enter_task") as! TaskEntryViewController
-            
-            guard let entry_task = storyboard?.instantiateViewController(withIdentifier: "enter_task") as? TaskEntryViewController else
-            {
-                return
-            }
-            
-            entry_task.title = "New Task"
-            // Everytime user enters in a task, update the table view.
-            entry_task.update =
-            {
-                self.updateTask()
-            }
-        
-            
-            navigationController?.pushViewController(entry_task, animated: true)
-        }
-        
-            
-    }
-
-    extension ViewController: UITableViewDelegate
     {
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+        task.removeAll()
+        
+        guard let task_count = UserDefaults().value(forKey: "counting_task") as? Int else
         {
-            tableView.deselectRow(at: indexPath, animated: true)
-
-            let entry_task = storyboard?.instantiateViewController(withIdentifier: "task_info") as! DisplayTaskViewController
-
-            entry_task.title = "New Task"
-            entry_task.submitted_task = task[indexPath.row]
-            
-            navigationController?.pushViewController(entry_task, animated: true)
+            return
+        }
+        
+        for i in 0..<task_count
+        {
+            if let enter_task = UserDefaults().value(forKey: "task_value_\(i + 1)") as? String
+            {
+                task.append(enter_task)
+            }
+        }
+        
+        tableView.reloadData()
+    }
+        
+    @IBAction func addTask()
+    {
+        //let entry_task = storyboard?.instantiateViewController(withIdentifier: "enter_task") as! TaskEntryViewController
+        
+//        let entry_task_date = storyboard?.instantiateViewController(withIdentifier: "enter_task") as! TaskEntryViewController
+        
+        guard let entry_task = storyboard?.instantiateViewController(withIdentifier: "enter_task") as? TaskEntryViewController else
+        {
+            return
+        }
+        
+        entry_task.title = "New Task"
+        // Everytime user enters in a task, update the table view.
+        entry_task.update =
+        {
+            self.updateTask()
+        }
+    
+        
+        navigationController?.pushViewController(entry_task, animated: true)
+    }
+    
+    func submitZipCode (_ sender: UIButton)
+    {
+        
+        if (submit_zip_code.isSelected && zip_code.text != nil)
+        {
+            _ = WeatherAPI.init(zip_code: zip_code.text!)
         }
     }
-
-
-    extension ViewController: UITableViewDataSource
-    {
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-        {
-            return (task.count)
-        }
-        
-        // Using template over and over inorder to get instance of the cell so we can supply each cell extra information.
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-        {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "main_cell", for: indexPath)
-            
-            cell.textLabel?.text = task[indexPath.row]
-            
-            return (cell)
-        }
-
 }
 
+extension ViewController: UITableViewDelegate
+{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let entry_task = storyboard?.instantiateViewController(withIdentifier: "task_info") as! DisplayTaskViewController
+
+        entry_task.title = "New Task"
+        entry_task.submitted_task = task[indexPath.row]
+        
+        navigationController?.pushViewController(entry_task, animated: true)
+    }
+}
+
+
+extension ViewController: UITableViewDataSource
+{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return (task.count)
+    }
+    
+    // Using template over and over inorder to get instance of the cell so we can supply each cell extra information.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "main_cell", for: indexPath)
+        
+        cell.textLabel?.text = task[indexPath.row]
+        
+        return (cell)
+    }
+}
