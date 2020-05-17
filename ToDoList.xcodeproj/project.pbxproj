@@ -13,6 +13,8 @@
 		A7152E172470E7A4004FED19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7152E152470E7A4004FED19 /* Main.storyboard */; };
 		A7152E192470E7A7004FED19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7152E182470E7A7004FED19 /* Assets.xcassets */; };
 		A7152E1C2470E7A7004FED19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7152E1A2470E7A7004FED19 /* LaunchScreen.storyboard */; };
+		A7152E242470EB46004FED19 /* TaskEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7152E232470EB46004FED19 /* TaskEntryViewController.swift */; };
+		A7152E262470EB5F004FED19 /* DisplayTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7152E252470EB5F004FED19 /* DisplayTaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		A7152E182470E7A7004FED19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7152E1B2470E7A7004FED19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7152E1D2470E7A7004FED19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7152E232470EB46004FED19 /* TaskEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEntryViewController.swift; sourceTree = "<group>"; };
+		A7152E252470EB5F004FED19 /* DisplayTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayTaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				A7152E0F2470E7A4004FED19 /* AppDelegate.swift */,
 				A7152E112470E7A4004FED19 /* SceneDelegate.swift */,
 				A7152E132470E7A4004FED19 /* ViewController.swift */,
+				A7152E232470EB46004FED19 /* TaskEntryViewController.swift */,
+				A7152E252470EB5F004FED19 /* DisplayTaskViewController.swift */,
 				A7152E152470E7A4004FED19 /* Main.storyboard */,
 				A7152E182470E7A7004FED19 /* Assets.xcassets */,
 				A7152E1A2470E7A7004FED19 /* LaunchScreen.storyboard */,
@@ -138,6 +144,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7152E262470EB5F004FED19 /* DisplayTaskViewController.swift in Sources */,
+				A7152E242470EB46004FED19 /* TaskEntryViewController.swift in Sources */,
 				A7152E142470E7A4004FED19 /* ViewController.swift in Sources */,
 				A7152E102470E7A4004FED19 /* AppDelegate.swift in Sources */,
 				A7152E122470E7A4004FED19 /* SceneDelegate.swift in Sources */,
