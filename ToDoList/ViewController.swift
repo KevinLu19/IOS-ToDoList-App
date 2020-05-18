@@ -32,7 +32,6 @@ class ViewController: UIViewController
         {
             UserDefaults().set(true, forKey: "setting_up")
             UserDefaults().set(0, forKey: "counting_task")
-            UserDefaults().set(0, forKey: "counting_task_dates")
         }
         
         updateTask()
@@ -68,7 +67,6 @@ class ViewController: UIViewController
         }
         
         entry_task.title = "New Task"
-        // Everytime user enters in a task, update the table view.
         entry_task.update =
         {
             self.updateTask()
