@@ -156,6 +156,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="task_time_picker" destination="LUr-Zs-yhn" id="BxO-ek-LoL"/>
                         <outlet property="tempt_lablel" destination="V5y-NR-cRL" id="Suv-74-iaN"/>
                         <outlet property="text_field" destination="Bbg-lv-Han" id="liG-TQ-Nu4"/>
                         <outlet property="weather_description_label" destination="fyb-Zh-kbZ" id="v8I-Uc-Amf"/>

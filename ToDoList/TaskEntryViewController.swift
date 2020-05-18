@@ -12,6 +12,7 @@ import Foundation
 class TaskEntryViewController: UIViewController, UITextFieldDelegate
 {
 
+    @IBOutlet var task_time_picker: UIDatePicker!
     @IBOutlet var text_field: UITextField!
     
     @IBOutlet weak var tempt_lablel: UILabel!
@@ -26,7 +27,7 @@ class TaskEntryViewController: UIViewController, UITextFieldDelegate
         
         guard let user_zip = UserDefaults().value(forKey: "user_zip_code") as? String else { return }
         
-        let full_weather_url = "http://api.openweathermap.org/data/2.5/weather?zip=\(user_zip),us&units=imperial&appid=<API_KEY>"
+        let full_weather_url = "http://api.openweathermap.org/data/2.5/weather?zip=\(user_zip),us&units=imperial&appid=<API KEY>"
         
         guard let url = URL(string: full_weather_url) else { return }
 
@@ -105,19 +106,18 @@ class TaskEntryViewController: UIViewController, UITextFieldDelegate
             return
         }
         
+        guard let task_date_count = UserDefaults().value(forKey: "counting_task_dates") as? Int else { return }
+        
         let new_count = count + 1
         
         UserDefaults().set(new_count, forKey: "counting_task")
         UserDefaults().set(text, forKey: "task_value_\(new_count)")
-        //UserDefaults().set(task_date, forKey: "task_date_\(new_count)")
+        UserDefaults().set(task_date_count, forKey: "task_date_\(new_count)")
         
         // Update table view via passing reference.
         update?()
         
         navigationController?.popViewController(animated: true)
-        
-//        let view_task = storyboard?.instantiateViewController(withIdentifier: "view_tasks") as! ViewToDoListScreen
-//        navigationController?.pushViewController(view_task, animated: true)
     }
     
 }
