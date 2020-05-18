@@ -46,6 +46,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDo-e6-dYk">
                                 <rect key="frame" x="292" y="110" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitZipCodeBtnWithSender:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="eX6-oa-FdO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -71,7 +74,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="submit_zip_code" destination="TDo-e6-dYk" id="BBW-Uw-KVC"/>
                         <outlet property="tableView" destination="KX8-QI-XMl" id="PJY-SJ-B01"/>
                         <outlet property="zip_code" destination="f1h-PT-OlN" id="xe2-tN-Tyv"/>
                     </connections>
@@ -177,7 +179,7 @@
                                     <constraint firstAttribute="height" constant="168" id="dre-ss-eQy"/>
                                     <constraint firstAttribute="width" constant="374" id="gIk-hD-EwU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="60"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>

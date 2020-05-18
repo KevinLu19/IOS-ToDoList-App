@@ -17,8 +17,6 @@ class TaskEntryViewController: UIViewController, UITextFieldDelegate
     @IBOutlet weak var tempt_lablel: UILabel!
     @IBOutlet weak var weather_description_label: UILabel!
     
-    var user_zip_code: WeatherAPI!
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -26,14 +24,11 @@ class TaskEntryViewController: UIViewController, UITextFieldDelegate
         text_field.becomeFirstResponder()
         text_field.delegate = self
         
-        //"http://api.openweathermap.org/data/2.5/weather?zip=11220,us&units=imperial&appid=<API KEY>"
-        let open_weather_map_url = "http://api.openweathermap.org/data/2.5/weather?zip="
-        let second_half_weather_url = ",us&units=imperial&appid="
-        let weather_api_key = ProcessInfo.processInfo.environment["WEATHER_API_KEY"]
+        guard let user_zip = UserDefaults().value(forKey: "user_zip_code") as? String else { return }
         
-        let full_open_weather_url = open_weather_map_url + user_zip_code.get_zip_code + second_half_weather_url + weather_api_key!
+        let full_weather_url = "http://api.openweathermap.org/data/2.5/weather?zip=\(user_zip),us&units=imperial&appid=<API_KEY>"
         
-        guard let url = URL(string: full_open_weather_url) else { return }
+        guard let url = URL(string: full_weather_url) else { return }
 
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data, error == nil
@@ -47,7 +42,7 @@ class TaskEntryViewController: UIViewController, UITextFieldDelegate
                     guard let weather_main = json["main"] as? [String: Any] else { return }
                     
                     let tempt = Int(weather_main["temp"] as? Double ?? 0)
-                    let weather_description = (weather_info.first?["description"] as? String)
+                    let weather_description = (weather_info.first?["description"] as? String)?.capitalizeFirstLetterOfDescription()
                     
                     DispatchQueue.main.async
                     {
@@ -125,4 +120,12 @@ class TaskEntryViewController: UIViewController, UITextFieldDelegate
 //        navigationController?.pushViewController(view_task, animated: true)
     }
     
+}
+
+extension String
+{
+    func capitalizeFirstLetterOfDescription () -> String
+    {
+        return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
 }
