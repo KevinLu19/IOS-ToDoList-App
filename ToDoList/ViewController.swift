@@ -8,28 +8,10 @@
 
 import UIKit
 
-class WeatherAPI
-{
-    private var weather_app_endstop = "api.openweathermap.org/data/2.5/weather?zip="
-    //94040,us
-    private var user_zip_code: String!
-    
-    public init (zip_code: String)
-    {
-        self.user_zip_code = zip_code
-    }
-    
-    var get_zip_code: String
-    {
-        get {return user_zip_code}
-    }
-}
-
 class ViewController: UIViewController
 {
     @IBOutlet var tableView: UITableView!
     @IBOutlet var zip_code: UITextField!
-    @IBOutlet var submit_zip_code: UIButton!
     
     private var task = [String]()
     
@@ -41,6 +23,8 @@ class ViewController: UIViewController
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //submitZipCode(submit_zip_code)
         
         // Setting up the mechanism using UserDefaults
         // Learned gritty details from https://developer.apple.com/documentation/foundation/userdefaults
@@ -78,8 +62,6 @@ class ViewController: UIViewController
     {
         //let entry_task = storyboard?.instantiateViewController(withIdentifier: "enter_task") as! TaskEntryViewController
         
-//        let entry_task_date = storyboard?.instantiateViewController(withIdentifier: "enter_task") as! TaskEntryViewController
-        
         guard let entry_task = storyboard?.instantiateViewController(withIdentifier: "enter_task") as? TaskEntryViewController else
         {
             return
@@ -96,14 +78,18 @@ class ViewController: UIViewController
         navigationController?.pushViewController(entry_task, animated: true)
     }
     
-    func submitZipCode (_ sender: UIButton)
+    @IBAction func submitZipCodeBtn (sender: UIButton)
     {
-        
-        if (submit_zip_code.isSelected && zip_code.text != nil)
+        if (zip_code!.text != nil)
         {
-            _ = WeatherAPI.init(zip_code: zip_code.text!)
+            UserDefaults().set(zip_code!.text, forKey: "user_zip_code")
+            
+            let alert = UIAlertController(title: "Alert", message: "Zip Code Saved!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Confirm", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
+
 }
 
 extension ViewController: UITableViewDelegate
